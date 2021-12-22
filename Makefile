@@ -22,7 +22,7 @@ docker-up-background-test:
 	@docker-compose -f tests/docker-compose.yml up -d
 
 docker-run-test:
-	@docker-compose -f tests/docker-compose.yml run php_test tests/run.sh
+	@docker-compose -f tests/docker-compose.yml run php_test tests/run.sh $(ifWordTestPresentThenRemove)
 
 docker-down-test:
 	@docker-compose -f tests/docker-compose.yml down --remove-orphans -v --rmi local
