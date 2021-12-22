@@ -1,0 +1,16 @@
+find_items:
+  path: /items
+  methods: GET
+  defaults: { _controller: Zeelo\ItemContext\Infrastructure\Item\Http\FindItemsController }
+
+find_item:
+  path: /items/{id}
+  requirements:
+    id: '[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-4[0-9A-Fa-f]{3}-[89ABab][0-9A-Fa-f]{3}-[0-9A-Fa-f]{12}'
+  methods: GET
+  defaults: { _controller: Zeelo\ItemContext\Infrastructure\Item\Http\FindItemController }
+
+create_item:
+  path: /items
+  methods: POST
+  defaults: { _controller: Zeelo\ItemContext\Infrastructure\Item\Http\CreateItemController }

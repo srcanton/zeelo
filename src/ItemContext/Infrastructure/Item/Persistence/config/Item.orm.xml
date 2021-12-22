@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Zeelo\ItemContext\Domain\Item\Item" table="items">
+    <id name="id" type="itemIdType" length="36"/>
+    <embedded name="image" class="Zeelo\ItemContext\Domain\Item\ItemImage"
+              use-column-prefix="false"/>
+    <embedded name="title" class="Zeelo\ItemContext\Domain\Item\ItemTitle"
+              use-column-prefix="false"/>
+    <embedded name="author" class="Zeelo\ItemContext\Domain\Item\ItemAuthor"
+              use-column-prefix="false"/>
+    <embedded name="price" class="Zeelo\ItemContext\Domain\Item\ItemPrice"
+              use-column-prefix="false"/>
+  </entity>
+</doctrine-mapping>

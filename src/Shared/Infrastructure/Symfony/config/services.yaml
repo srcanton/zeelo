@@ -1,0 +1,72 @@
+parameters:
+  service_name: '%env(string:SERVICE_NAME)%'
+  service_version: '%env(string:SERVICE_VERSION)%'
+  service_owner: '%env(string:SERVICE_OWNER)%'
+  messenger_transport_dsn: '%env(string:MESSENGER_TRANSPORT_DSN)%'
+
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    bind:
+      $projectDir: '%kernel.project_dir%'
+
+  Zeelo\:
+    resource: '../../../../'
+    exclude: '../**/{config,DependencyInjection,Entity,Migrations,Controller,Kernel.php}'
+
+  Zeelo\Shared\Infrastructure\Symfony\Controller\:
+    resource: '../Controller'
+    tags: [ 'controller.service_arguments' ]
+
+  Zeelo\Shared\Infrastructure\Symfony\Repository\:
+    resource: '../Repository'
+    tags: [ 'repository.service_arguments' ]
+
+  Zeelo\Shared\Infrastructure\Messaging\QueryBusInterface:
+    class: Zeelo\Shared\Infrastructure\Messaging\TacticianQueryBus
+    autowire: true
+
+  Zeelo\Shared\Infrastructure\Messaging\CommandBusInterface:
+    class: Zeelo\Shared\Infrastructure\Messaging\TacticianCommandBus
+    autowire: true
+
+  Zeelo\Shared\Infrastructure\Messaging\ServiceBusInterface:
+    class: Zeelo\Shared\Infrastructure\Messaging\TacticianServiceBus
+    autowire: true
+
+  Zeelo\ItemContext\Domain\Item\Repository\ItemRepositoryInterface:
+    class: Zeelo\ItemContext\Infrastructure\Item\Persistence\Repository\ItemRepository
+    autowire: true
+    tags: [doctrine.repository_service]
+
+  Zeelo\ItemContext\Domain\Item\Service\ItemsFinderService:
+    autowire: true
+
+  Zeelo\ItemContext\Domain\Item\Service\ItemFinderService:
+    autowire: true
+
+  Zeelo\ItemContext\Application\Item\Query\FindItemsQueryHandler:
+    autowire: true
+    tags:
+      - { name: tactician.handler, command: Zeelo\ItemContext\Application\Item\Query\FindItemsQuery }
+
+  Zeelo\ItemContext\Application\Item\Query\FindItemQueryHandler:
+    autowire: true
+    tags:
+      - { name: tactician.handler, command: Zeelo\ItemContext\Application\Item\Query\FindItemQuery }
+
+  Zeelo\ItemContext\Application\Item\Command\CreateItemCommandHandler:
+    autowire: true
+    tags:
+      - { name: tactician.handler, command: Zeelo\ItemContext\Application\Item\Command\CreateItemCommand }
+
+  Zeelo\ItemContext\Application\Item\Service\GetItemResponseServiceHandler:
+    autowire: true
+    tags:
+      - { name: tactician.handler, command: Zeelo\ItemContext\Application\Item\Service\GetItemResponseService }
+
+  Zeelo\ItemContext\Application\Item\Service\GetItemsResponseServiceHandler:
+    autowire: true
+    tags:
+      - { name: tactician.handler, command: Zeelo\ItemContext\Application\Item\Service\GetItemsResponseService }

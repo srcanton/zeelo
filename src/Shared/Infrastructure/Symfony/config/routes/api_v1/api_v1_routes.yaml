@@ -1,0 +1,3 @@
+item_api:
+  name_prefix: item_
+  resource: item_routes.yaml

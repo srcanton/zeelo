@@ -1,0 +1,7 @@
+v1:
+  prefix: /v1
+  name_prefix: api_v1_
+  resource: api_v1/api_v1_routes.yaml
+
+
+

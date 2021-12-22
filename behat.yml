@@ -1,0 +1,14 @@
+default:
+  suites:
+    functional:
+      paths:
+        - '%paths.base%/tests/Functional/Feature'
+      contexts:
+        - Zeelo\Tests\Functional\Context\MainContext
+
+  extensions:
+    FriendsOfBehat\SymfonyExtension:
+      kernel:
+        class: Zeelo\Shared\Infrastructure\Symfony\Kernel
+        environment: test
+        path: '%paths.base%/src/Shared/Infrastructure/Symfony/Kernel.php'

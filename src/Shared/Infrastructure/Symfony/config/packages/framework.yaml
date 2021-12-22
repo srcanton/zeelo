@@ -1,0 +1,14 @@
+framework:
+  session:
+    handler_id: null
+    cookie_secure: auto
+    cookie_samesite: lax
+  php_errors:
+    log: true
+  default_locale: 'en'
+  cache:
+    pools:
+      doctrine.result_cache_pool:
+        adapter: cache.app
+      doctrine.system_cache_pool:
+        adapter: cache.system

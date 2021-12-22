@@ -1,0 +1,21 @@
+version: "3.3"
+
+services:
+  mysql_test:
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=zeelo
+    ports:
+      - '3306:3306'
+
+  php_test:
+    build:
+      context: ../docker/php
+    working_dir: /var/www
+    volumes:
+      - ../:/var/www:delegated
+    links:
+      - mysql_test
+    env_file:
+      - ../.env.test

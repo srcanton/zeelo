@@ -1,0 +1,11 @@
+doctrine_migrations:
+  # List of namespace/path pairs to search for migrations, at least one required
+  migrations_paths:
+    'Application\Migrations': '%kernel.project_dir%/src/Shared/Infrastructure/Symfony/DoctrineMigrations'
+  organize_migrations: "BY_YEAR_AND_MONTH"
+  storage:
+    table_storage:
+      table_name: 'migration_versions'
+      version_column_name: 'version'
+      version_column_length: 1024
+      executed_at_column_name: 'executed_at'
